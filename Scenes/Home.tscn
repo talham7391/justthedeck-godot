@@ -30,7 +30,6 @@ text = "Join Game"
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="dialog_join_game" type="PopupDialog" parent="."]
-editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.1
 anchor_right = 0.95
@@ -61,3 +60,5 @@ anchor_top = 0.8
 anchor_right = 0.8
 anchor_bottom = 0.8
 text = "Join Game"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="dialog_join_game"]

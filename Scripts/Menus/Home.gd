@@ -3,13 +3,18 @@ extends Control
 func _ready():
 	$button_create_game.connect("pressed", self, "on_create_game")
 	$button_join_game.connect("pressed", self, "on_join_game")
+	$HTTPRequest.connect("request_completed", self, "on_request_completed")
 
 func on_create_game():
 	block_input()
-	$HTTPRequest.connect("request_completed", self, "on_request_completed")
-	$HTTPRequest.request("http://localhost:8000/test")
+	$HTTPRequest.request(
+		"http://localhost:8000/games",
+		PoolStringArray(),
+		true,
+		HTTPClient.METHOD_POST)
 
 func on_request_completed(result, response_code, headers, body):
+	print(response_code)
 	print(body.get_string_from_utf8())
 	enable_input()
 
