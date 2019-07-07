@@ -1,0 +1,6 @@
+/Users/Talha/godot/just-the-deck/.mono/temp/bin/Tools/Just the Deck.dll
+/Users/Talha/godot/just-the-deck/.mono/temp/bin/Tools/Just the Deck.pdb
+/Users/Talha/godot/just-the-deck/.mono/temp/obj/Tools/Just the Deck.csprojAssemblyReference.cache
+/Users/Talha/godot/just-the-deck/.mono/temp/obj/Tools/Just the Deck.csproj.CoreCompileInputs.cache
+/Users/Talha/godot/just-the-deck/.mono/temp/obj/Tools/Just the Deck.dll
+/Users/Talha/godot/just-the-deck/.mono/temp/obj/Tools/Just the Deck.pdb
