@@ -1,4 +1,5 @@
 extends Control
+var utils = load("res://script/menu/utils.gd").new()
 
 func _ready():
 	$button_create_game.connect("pressed", self, "on_create_game")
@@ -14,8 +15,12 @@ func on_create_game():
 		HTTPClient.METHOD_POST)
 
 func on_request_completed(result, response_code, headers, body):
-	print(response_code)
-	print(body.get_string_from_utf8())
+	if response_code == HTTPClient.RESPONSE_OK:
+		var json = JSON.parse(body.get_string_from_utf8())
+		var data = json.result
+		utils.join_game(get_tree().get_root(), data["gameId"])
+	else:
+		print("Error creating game.")
 	enable_input()
 
 func on_join_game():
