@@ -2,6 +2,7 @@ extends Control
 var utils = load("res://script/menu/utils.gd").new()
 
 func _ready():
+	$input_player_name.text = "Bobby"
 	$button_create_game.connect("pressed", self, "on_create_game")
 	$button_join_game.connect("pressed", self, "on_join_game")
 	$HTTPRequest.connect("request_completed", self, "on_request_completed")
@@ -18,12 +19,14 @@ func on_request_completed(result, response_code, headers, body):
 	if response_code == HTTPClient.RESPONSE_OK:
 		var json = JSON.parse(body.get_string_from_utf8())
 		var data = json.result
-		utils.join_game(get_tree().get_root(), data["gameId"])
+		var player_name = $input_player_name.text
+		utils.join_game(get_tree().get_root(), data["gameId"], player_name)
 	else:
 		print("Error creating game.")
 	enable_input()
 
 func on_join_game():
+	$dialog_join_game.player_name = $input_player_name.text
 	$dialog_join_game.popup()
 	
 func block_input():

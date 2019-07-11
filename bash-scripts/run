@@ -1,0 +1,9 @@
+if [ -z "$1" ]
+then
+	open build/test_build.app
+else
+	for ((c=1; c<="$1"; c++ ))
+	do
+		open -n build/test_build.app
+	done
+fi
