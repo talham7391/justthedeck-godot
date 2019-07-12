@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://script/room/game/index.gd" type="Script" id=1]
-[ext_resource path="res://script/room/game/connected_players.gd" type="Script" id=2]
+[ext_resource path="res://script/attached/game_scene/GameScene.gd" type="Script" id=1]
+[ext_resource path="res://script/attached/game_scene/ConnectedPlayersDialog.gd" type="Script" id=2]
 
 [node name="room_game" type="Spatial"]
 script = ExtResource( 1 )

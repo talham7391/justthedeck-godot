@@ -1,11 +1,18 @@
 extends Control
-var utils = load("res://script/menu/utils.gd").new()
+
+var DEFAULT_PLAYER_NAME = "Bobby"
 
 func _ready():
-	$input_player_name.text = "Bobby"
+	State.set_player_name(DEFAULT_PLAYER_NAME)
+	$input_player_name.text = DEFAULT_PLAYER_NAME
+
 	$button_create_game.connect("pressed", self, "on_create_game")
 	$button_join_game.connect("pressed", self, "on_join_game")
+	$input_player_name.connect("text_changed", self, "on_player_name_change")
 	$HTTPRequest.connect("request_completed", self, "on_request_completed")
+
+func on_player_name_change(new_name):
+	State.set_player_name(new_name)
 
 func on_create_game():
 	block_input()
@@ -13,28 +20,31 @@ func on_create_game():
 		"http://localhost:8000/games",
 		PoolStringArray(),
 		true,
-		HTTPClient.METHOD_POST)
+		HTTPClient.METHOD_POST
+	)
+
+func on_join_game():
+	$dialog_join_game.popup()
 
 func on_request_completed(result, response_code, headers, body):
 	if response_code == HTTPClient.RESPONSE_OK:
 		var json = JSON.parse(body.get_string_from_utf8())
 		var data = json.result
-		var player_name = $input_player_name.text
-		utils.join_game(get_tree().get_root(), data["gameId"], player_name)
+		var game_id = data["gameId"]
+		if game_id != null:
+			print("Created a game - Id: %s" % game_id)
+			State.set_game_id(game_id)
+			get_tree().change_scene("res://Scenes/room_game.tscn")
 	else:
 		print("Error creating game.")
 	enable_input()
-
-func on_join_game():
-	$dialog_join_game.player_name = $input_player_name.text
-	$dialog_join_game.popup()
-	
-func block_input():
-	for child in get_children():
-		if child is Button:
-			child.disabled = true
 
 func enable_input():
 	for child in get_children():
 		if child is Button:
 			child.disabled = false
+
+func block_input():
+	for child in get_children():
+		if child is Button:
+			child.disabled = true

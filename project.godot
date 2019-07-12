@@ -19,6 +19,11 @@ config/name="Just the Deck"
 run/main_scene="res://Scenes/menu_home.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+State="*res://script/globals/State.gd"
+Client="*res://script/globals/Client.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
