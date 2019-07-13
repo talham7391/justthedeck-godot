@@ -22,10 +22,13 @@ func on_connection_established(protocol):
 	print("Connected")
 	print("Sending name to server.")
 	var data = {
-		"action": "SET_NAME",
-		"name": State.get_player_name()
+		"name": "SET_NAME",
+		"data": {
+			"name": State.get_player_name()
+		}
 	}
 	var err = send_obj_to_server(data)
+	print(err)
 
 func on_connection_closed(was_clean_close):
 	print("Closed - clean: %s" % was_clean_close)
@@ -45,5 +48,5 @@ func send_obj_to_server(data):
 	return client.get_peer(1).put_packet(JSON.print(data).to_utf8())
 
 func handle_message_from_server(mssg):
-	if mssg["action"] == "PLAYER_STATES":
-		State.set_player_states(mssg["states"])
+	if mssg["name"] == "PLAYERS":
+		State.set_players(mssg["players"])

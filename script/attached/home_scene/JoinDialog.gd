@@ -10,7 +10,7 @@ func on_game_id_changed(new_game_id):
 
 func try_join():
 	var game_id = State.get_game_id()
-	$HTTPRequest.request("http://localhost:8000/games/%s/state" % game_id)
+	$HTTPRequest.request("http://localhost:8000/games/%s" % game_id)
 
 func on_request_completed(result, response_code, headers, body):
 	if response_code == HTTPClient.RESPONSE_OK:

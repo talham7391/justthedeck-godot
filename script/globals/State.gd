@@ -21,13 +21,13 @@ func get_game_id():
 
 
 # PLAYER STATES
-var _player_states = null
+var _players = null
 
-signal player_states_updated
+signal players_updated
   
-func set_player_states(player_states):
-  _player_states = player_states
-  emit_signal("player_states_updated", _player_states)
+func set_players(player_states):
+  _players = player_states
+  emit_signal("players_updated", _players)
 
-func get_player_states():
-  return _player_states
+func get_players():
+  return _players
