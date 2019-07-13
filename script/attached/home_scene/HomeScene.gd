@@ -1,10 +1,7 @@
 extends Control
 
-var DEFAULT_PLAYER_NAME = "Bobby"
-
 func _ready():
-	State.set_player_name(DEFAULT_PLAYER_NAME)
-	$input_player_name.text = DEFAULT_PLAYER_NAME
+	$input_player_name.text = State.get_player_name()
 
 	$button_create_game.connect("pressed", self, "on_create_game")
 	$button_join_game.connect("pressed", self, "on_join_game")

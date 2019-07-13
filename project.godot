@@ -21,6 +21,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Defaults="*res://script/globals/Defaults.gd"
+Channel="*res://script/globals/Channel.gd"
 State="*res://script/globals/State.gd"
 Client="*res://script/globals/Client.gd"
 

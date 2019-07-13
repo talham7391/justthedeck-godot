@@ -50,3 +50,14 @@ func send_obj_to_server(data):
 func handle_message_from_server(mssg):
 	if mssg["name"] == "PLAYERS":
 		State.set_players(mssg["players"])
+	
+	if mssg["name"] == "CARDS_ON_TABLE":
+		print("Got cards on table!")
+		print(mssg)
+
+	if mssg["name"] == "PLAYER_PUT_CARDS_ON_TABLE":
+		Channel.emit_signal(
+			"pending_player_put_cards_on_table",
+			mssg["playerName"],
+			mssg["cards"]
+		)

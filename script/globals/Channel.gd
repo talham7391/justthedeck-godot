@@ -1,0 +1,5 @@
+extends Node
+
+signal input_event_on_table
+
+signal pending_player_put_cards_on_table
