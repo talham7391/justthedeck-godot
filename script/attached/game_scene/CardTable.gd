@@ -1,4 +1,4 @@
-extends StaticBody
+extends RigidBody
 
 var Card = preload("res://Scenes/objects/Card.tscn")
 
