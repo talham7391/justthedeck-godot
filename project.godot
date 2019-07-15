@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Just the Deck"
-run/main_scene="res://Scenes/menu_home.tscn"
+run/main_scene="res://Scenes/room_game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 Defaults="*res://script/globals/Defaults.gd"
 Channel="*res://script/globals/Channel.gd"
 State="*res://script/globals/State.gd"
+Card="*res://script/globals/Card.gd"
 Client="*res://script/globals/Client.gd"
 
 [rendering]

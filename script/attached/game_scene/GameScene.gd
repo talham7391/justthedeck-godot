@@ -11,12 +11,15 @@ func _ready():
 	Client.start()
 
 func on_input_event_on_table(pos):
+	var num_idx = randi() % 13
+	var suit_idx = randi() % 4
 	var data = {
 		"name": "PUT_CARDS_ON_TABLE",
 		"data": {
 			"cards": [{
 				"type": "Normal",
-				"suit": "Diamonds","number": 3,
+				"suit": "%s" % Card.normal_cards["suits"][suit_idx],
+				"value": Card.normal_cards["values"][num_idx],
 				"side": "FACE_UP",
 				"location": {
 					"x": pos.x,

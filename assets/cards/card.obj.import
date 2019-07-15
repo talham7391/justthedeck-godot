@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/card.obj-daab28ad5bc6e2dbbb15aa2bb5404b3b.mesh"
+
+[deps]
+
+files=[ "res://.import/card.obj-daab28ad5bc6e2dbbb15aa2bb5404b3b.mesh" ]
+
+source_file="res://assets/cards/card.obj"
+dest_files=[ "res://.import/card.obj-daab28ad5bc6e2dbbb15aa2bb5404b3b.mesh", "res://.import/card.obj-daab28ad5bc6e2dbbb15aa2bb5404b3b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

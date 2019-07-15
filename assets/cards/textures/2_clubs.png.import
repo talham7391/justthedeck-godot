@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/5_diamonds.png-e53db0e86b7b9cc683f1be798326425c.s3tc.stex"
-path.etc2="res://.import/5_diamonds.png-e53db0e86b7b9cc683f1be798326425c.etc2.stex"
+path.s3tc="res://.import/2_clubs.png-a752e01936a2bef41f14cb92652bc126.s3tc.stex"
+path.etc2="res://.import/2_clubs.png-a752e01936a2bef41f14cb92652bc126.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/cards/5_diamonds.png"
-dest_files=[ "res://.import/5_diamonds.png-e53db0e86b7b9cc683f1be798326425c.s3tc.stex", "res://.import/5_diamonds.png-e53db0e86b7b9cc683f1be798326425c.etc2.stex" ]
+source_file="res://assets/cards/textures/2_clubs.png"
+dest_files=[ "res://.import/2_clubs.png-a752e01936a2bef41f14cb92652bc126.s3tc.stex", "res://.import/2_clubs.png-a752e01936a2bef41f14cb92652bc126.etc2.stex" ]
 
 [params]
 

@@ -1,7 +1,5 @@
 extends Area
 
-var Card = preload("res://Scenes/objects/Card.tscn")
-
 func _ready():
 	connect("input_event", self, "on_input_event")
 	Channel.connect("pending_player_put_cards_on_table", self, "on_pending_player_put_cards_on_table")
@@ -21,7 +19,7 @@ func on_pending_player_put_cards_on_table(player_name, cards):
 	var root = get_tree().get_root()
 	var scene = root.get_child(root.get_child_count() - 1)
 	for card in cards:
-		var card_instance = Card.instance()
+		var card_instance = Card.instantiate("%s_%s" % [card["value"], card["suit"]])
 		var rel_pos = Vector2(card.location.x, card.location.y)
 		var card_pos = relative_to_card_table(rel_pos)
 		card_instance.global_translate(Vector3(card_pos.x, 0.2, card_pos.y))
