@@ -1,4 +1,4 @@
-extends RigidBody
+extends Area
 
 var Card = preload("res://Scenes/objects/Card.tscn")
 
@@ -6,14 +6,26 @@ func _ready():
 	connect("input_event", self, "on_input_event")
 	Channel.connect("pending_player_put_cards_on_table", self, "on_pending_player_put_cards_on_table")
 
-func on_pending_player_put_cards_on_table(playerName, cards):
+func on_pending_player_put_cards_on_table(player_name, cards):
+	var player_join_order = null
+	var players = State.get_players()
+	for player in players:
+		if player["name"] == player_name:
+			player_join_order = player["joinOrder"]
+			break
+	
+	if player_join_order == null:
+		print("Error! Player join order not found.")
+		return
+	
 	var root = get_tree().get_root()
 	var scene = root.get_child(root.get_child_count() - 1)
 	for card in cards:
 		var card_instance = Card.instance()
 		var rel_pos = Vector2(card.location.x, card.location.y)
 		var card_pos = relative_to_card_table(rel_pos)
-		card_instance.global_translate(Vector3(card_pos.x, 4, card_pos.y))
+		card_instance.global_translate(Vector3(card_pos.x, 0.2, card_pos.y))
+		card_instance.rotation_degrees.y = get_card_instance_rotation(player_join_order)
 		scene.add_child(card_instance)
 
 func on_input_event(camera, event, click_position, click_normal, shape_idx):
@@ -30,4 +42,9 @@ func card_table_to_relative(click_position):
 	var play_x = click_position.x / ref.x
 	var play_z = click_position.z / ref.z
 	return Vector2(play_x, play_z)
+
+func get_card_instance_rotation(player_join_order):
+	var players = State.get_players()	
+	var gap_size = 360 / len(players)
+	return player_join_order * gap_size * -1
 	

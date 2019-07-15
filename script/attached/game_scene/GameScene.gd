@@ -26,4 +26,4 @@ func on_input_event_on_table(pos):
 		}
 	}
 	var err = Client.send_obj_to_server(data)
-	print(err)
+

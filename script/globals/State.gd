@@ -26,8 +26,8 @@ var _players = null
 
 signal players_updated
   
-func set_players(player_states):
-  _players = player_states
+func set_players(players):
+  _players = players
   emit_signal("players_updated", _players)
 
 func get_players():
