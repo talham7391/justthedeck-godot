@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://script/attached/game_scene/GameScene.gd" type="Script" id=1]
 [ext_resource path="res://script/attached/game_scene/ConnectedPlayersDialog.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/table/table.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://assets/table/table_texture.png" type="Texture" id=5]
 [ext_resource path="res://script/attached/game_scene/CameraPivot.gd" type="Script" id=6]
+[ext_resource path="res://script/attached/game_scene/Hand.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/objects/Card.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -65,6 +67,8 @@ environment = SubResource( 1 )
 [node name="ground" type="Area" parent="."]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.14406, 0 )
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="ground"]
@@ -91,3 +95,11 @@ projection = 1
 current = true
 fov = 57.3
 size = 40.0
+
+[node name="hand" type="Spatial" parent="camera_pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 20 )
+script = ExtResource( 7 )
+
+[node name="card" parent="camera_pivot/hand" instance=ExtResource( 8 )]
+transform = Transform( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, 0 )
+visible = false

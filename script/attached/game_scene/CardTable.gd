@@ -19,14 +19,19 @@ func on_pending_player_put_cards_on_table(player_name, cards):
 	var root = get_tree().get_root()
 	var scene = root.get_child(root.get_child_count() - 1)
 	for card in cards:
-		var card_instance = Card.instantiate("%s_%s" % [card["value"], card["suit"]])
-		var rel_pos = Vector2(card.location.x, card.location.y)
+		card.set_source(Constants.SOURCES.TABLE)
+		var card_instance = CardFactory.instantiate(card)
+		var rel_pos = Vector2(card.get_location().x, card.get_location().y)
 		var card_pos = relative_to_card_table(rel_pos)
 		card_instance.global_translate(Vector3(card_pos.x, 0.2, card_pos.y))
+		for child in card_instance.get_children():
+			child.rotation_degrees.y = 90
+			child.rotation_degrees.z = -90
 		card_instance.rotation_degrees.y = get_card_instance_rotation(player_join_order)
 		scene.add_child(card_instance)
 
 func on_input_event(camera, event, click_position, click_normal, shape_idx):
+	return
 	if event is InputEventMouseButton:
 		var pos = card_table_to_relative(click_position)
 		Channel.emit_signal("input_event_on_table", pos)

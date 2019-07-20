@@ -23,6 +23,7 @@ func sit_according_to(join_order):
 	rotation_degrees.y = gap_size * join_order * -1
 
 func _input(event):
+	return
 	if event is InputEventMouseButton:
 		mouse_pressed = event.pressed
 	elif event is InputEventMouseMotion:

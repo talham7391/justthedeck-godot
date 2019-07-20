@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/cards/card.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://script/attached/game_scene/Card.gd" type="Script" id=1]
+[ext_resource path="res://assets/cards/card.obj" type="ArrayMesh" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.00516, 1, 1 )
@@ -8,12 +9,13 @@ extents = Vector3( 1.00516, 1, 1 )
 [node name="card" type="Area"]
 collision_layer = 0
 collision_mask = 0
+script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1.33748e-16, -1.23266e-07, 2.03, -0.07, -1.23266e-07, 0, 3.0598e-09, -2.82, -8.87341e-08, 0, 0, 0 )
+transform = Transform( 0.07, 0, 0, 0, 2.82, 0, 0, 0, 2.03, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 3.82137e-15, -8.74228e-08, 2, -2, -8.74228e-08, 0, 8.74228e-08, -2, -8.74228e-08, 0, 0, 0 )
-mesh = ExtResource( 1 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+mesh = ExtResource( 2 )
 material/0 = null

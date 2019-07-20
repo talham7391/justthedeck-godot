@@ -53,11 +53,22 @@ func handle_message_from_server(mssg):
 	
 	if mssg["name"] == "CARDS_ON_TABLE":
 		print("Got cards on table!")
-		print(mssg)
 
 	if mssg["name"] == "PLAYER_PUT_CARDS_ON_TABLE":
 		Channel.emit_signal(
 			"pending_player_put_cards_on_table",
 			mssg["playerName"],
-			mssg["cards"]
+			Utils.jsonToCards(mssg["cards"])
+		)
+	
+	if mssg["name"] == "PUT_CARDS_IN_HAND":
+		Channel.emit_signal(
+			"pending_put_cards_in_hand",
+			Utils.jsonToCards(mssg["cards"])
+		)
+	
+	if mssg["name"] == "CARDS_IN_HAND":
+		Channel.emit_signal(
+			"cards_in_hand",
+			Utils.jsonToCards(mssg["cards"])
 		)

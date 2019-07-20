@@ -16,16 +16,19 @@ _global_script_class_icons={
 [application]
 
 config/name="Just the Deck"
-run/main_scene="res://Scenes/room_game.tscn"
+run/main_scene="res://Scenes/menu_home.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Defaults="*res://script/globals/Defaults.gd"
+Constants="*res://script/globals/Constants.gd"
 Channel="*res://script/globals/Channel.gd"
 State="*res://script/globals/State.gd"
-Card="*res://script/globals/Card.gd"
+CardFactory="*res://script/globals/CardFactory.gd"
 Client="*res://script/globals/Client.gd"
+Actions="*res://script/globals/Actions.gd"
+Utils="*res://script/globals/Utils.gd"
 
 [rendering]
 
