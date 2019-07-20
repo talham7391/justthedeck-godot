@@ -18,6 +18,12 @@ func init(card):
 	_card = card
 	call_deferred("fade_out")
 
+func cleanup():
+	set_selected(false)
+
+func get_card():
+	return _card
+
 func get_selected():
 	return _selected
 

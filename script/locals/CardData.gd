@@ -42,8 +42,17 @@ func set_location(location):
 	_location = location
 	return self
 
-func equals(card):
+func same_card_as(card):
+	if (
+		get_suit() == card.get_suit() and
+		get_type() == card.get_type() and
+		get_value() == card.get_value()
+	) :
+		return true
+	else:
+		return false
 
+func equals(card):
 	if (
 		get_suit() == card.get_suit() and
 		get_type() == card.get_type() and

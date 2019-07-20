@@ -72,3 +72,9 @@ func handle_message_from_server(mssg):
 			"cards_in_hand",
 			Utils.jsonToCards(mssg["cards"])
 		)
+	
+	if mssg["name"] == "REMOVE_CARDS_FROM_HAND":
+		Channel.emit_signal(
+			"pending_remove_cards_from_hand",
+			Utils.jsonToCards(mssg["cards"])
+		)

@@ -12,6 +12,13 @@ func clone_with_location_and_side(cards, location, side):
 		new_cards.append(clone_card(card).set_location(location).set_side(side))
 	return new_cards
 
+func filter_cards_by_source(cards, source):
+	var new_cards = []
+	for card in cards:
+		if card.get_source() == source:
+			new_cards.append(card)
+	return new_cards
+
 func jsonToCard(json):
 	var cd = CardData.new(json["value"], json["suit"], json["type"])
 	if "location" in json:

@@ -13,10 +13,14 @@ var mouse_pressed = false
 
 func _ready():
 	Channel.connect("pending_put_cards_in_hand", self, "on_pending_put_cards_in_hand")
+	Channel.connect("pending_remove_cards_from_hand", self, "on_pending_remove_cards_from_hand")
 	Channel.connect("cards_in_hand", self, "on_cards_in_hand")
 
 func on_pending_put_cards_in_hand(cards):
 	add_cards_to_hand(cards)
+
+func on_pending_remove_cards_from_hand(cards):
+	remove_cards_from_hand(cards)
 
 func on_cards_in_hand(cards):
 	remove_all_cards_in_hand()
@@ -38,6 +42,15 @@ func add_card_to_hand(card):
 func remove_all_cards_in_hand():
 	for card in get_children():
 		remove_child(card)
+
+func remove_cards_from_hand(cards):
+	for card_instance in get_children():
+		for card in cards:
+			if card_instance.get_card().same_card_as(card):
+				remove_child(card_instance)
+				card_instance.cleanup()
+				break
+	adjust_cards()
 
 func adjust_cards():
 	var CARD_GAP = 5
