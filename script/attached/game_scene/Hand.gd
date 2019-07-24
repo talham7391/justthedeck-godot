@@ -5,6 +5,8 @@ func get_hand_loc():
 	return _hand_loc
 
 func set_hand_loc(hand_loc):
+	_hand_loc = hand_loc
+	return
 	var LIMIT = 16
 	if -LIMIT < hand_loc and hand_loc < LIMIT:
 		_hand_loc = hand_loc
@@ -34,21 +36,21 @@ func add_card_to_hand(card):
 	card.set_source(Constants.SOURCES.HAND)
 	var card_instance = CardFactory.instantiate(card)
 	for child in card_instance.get_children():
-		child.rotation_degrees.y = 90
-	card_instance.scale = Vector3(2, 2, 2)
+		child.rotation_degrees.y = -90
+	var card_scale = 1.8
+	card_instance.scale = Vector3(card_scale, card_scale, card_scale)
 	add_child(card_instance)
 	adjust_cards()
 
 func remove_all_cards_in_hand():
 	for card in get_children():
-		remove_child(card)
+		card.free()
 
 func remove_cards_from_hand(cards):
-	for card_instance in get_children():
-		for card in cards:
+	for card in cards:
+		for card_instance in get_children():
 			if card_instance.get_card().same_card_as(card):
-				remove_child(card_instance)
-				card_instance.cleanup()
+				card_instance.free()
 				break
 	adjust_cards()
 

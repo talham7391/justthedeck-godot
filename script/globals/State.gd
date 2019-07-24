@@ -48,6 +48,20 @@ func get_clickable_entity():
 	return _clickable_entity
 
 
+# SELECT ALLOWED
+
+var _select_allowed = true
+
+signal select_allowed_changed
+
+func get_select_allowed():
+	return _select_allowed
+
+func set_select_allowed(select_allowed):
+	_select_allowed = select_allowed
+	emit_signal("select_allowed_changed", _select_allowed)
+
+
 # SELECTED CARDS
 
 var _selected_cards = []
@@ -66,4 +80,18 @@ func deselect_card(card):
 		if card.equals(_selected_cards[i]):
 			_selected_cards.remove(i)
 			break
-	emit_signal("selected_cards_changed", _selected_cards)	
+	emit_signal("selected_cards_changed", _selected_cards)
+
+
+# PLAY CARDS SIDE
+
+var _play_cards_side = null
+
+signal play_cards_side_changed
+
+func get_play_cards_side():
+	return _play_cards_side
+
+func set_play_cards_side(play_cards_side):
+	_play_cards_side = play_cards_side
+	emit_signal("play_cards_side_changed", _play_cards_side)

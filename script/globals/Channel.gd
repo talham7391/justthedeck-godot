@@ -2,7 +2,12 @@ extends Node
 
 signal input_event_on_table
 
-signal pending_player_put_cards_on_table
+signal pending_put_cards_on_table
 signal pending_put_cards_in_hand
 signal cards_in_hand
 signal pending_remove_cards_from_hand
+
+signal select_cards_on_table
+signal deselect_all_cards
+
+signal cards_played

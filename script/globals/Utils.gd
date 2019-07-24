@@ -6,6 +6,12 @@ func clone_card(card):
 	var cd = CardData.new(null, null, null)
 	return cd.copy(card)
 
+func clone_cards(cards):
+	var c = []
+	for card in cards:
+		c.append(clone_card(card))
+	return c
+
 func clone_with_location_and_side(cards, location, side):
 	var new_cards = []
 	for card in cards:
@@ -25,6 +31,8 @@ func jsonToCard(json):
 		cd.set_location(json["location"])
 	if "side" in json:
 		cd.set_side(json["side"])
+	if "playedBy" in json:
+		cd.set_played_by(json["playedBy"])
 	return cd
 
 func jsonToCards(json):

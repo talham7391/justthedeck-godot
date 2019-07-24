@@ -12,7 +12,7 @@ func start():
 
 	print("Connecting")
 	var game_id = State.get_game_id()
-	client.connect_to_url("ws://localhost:8000/ws/%s" % game_id)
+	client.connect_to_url("ws://192.168.0.53:8000/ws/%s" % game_id)
 
 func _process(delta):
 	if client != null and client.get_connection_status() != WebSocketClient.CONNECTION_DISCONNECTED:
@@ -51,13 +51,9 @@ func handle_message_from_server(mssg):
 	if mssg["name"] == "PLAYERS":
 		State.set_players(mssg["players"])
 	
-	if mssg["name"] == "CARDS_ON_TABLE":
-		print("Got cards on table!")
-
-	if mssg["name"] == "PLAYER_PUT_CARDS_ON_TABLE":
+	if mssg["name"] == "PUT_CARDS_ON_TABLE":
 		Channel.emit_signal(
-			"pending_player_put_cards_on_table",
-			mssg["playerName"],
+			"pending_put_cards_on_table",
 			Utils.jsonToCards(mssg["cards"])
 		)
 	
