@@ -5,15 +5,10 @@ var _selected
 
 func _ready():
 	State.connect("clickable_entity_changed", self, "on_clickable_entity_changed")
-	Channel.connect("select_cards_on_table", self, "on_select_cards_on_table")
-	Channel.connect("deselect_all_cards", self, "on_deselect_all_cards")
 	on_clickable_entity_changed(State.get_clickable_entity())
 
 func init(card):
 	_card = card
-
-func _exit_tree():
-	set_selected(false)
 
 func get_card():
 	return _card
@@ -30,24 +25,9 @@ func set_selected(selected):
 			if material is SpatialMaterial:
 				material.albedo_color = Color.blue if selected else Color.white
 	_selected = selected
-	
-	if selected:
-		State.select_card(_card)
-	else:
-		State.deselect_card(_card)
 
 func toggle_selected():
 	set_selected(!get_selected())
-
-func on_select_cards_on_table(side):
-	if (
-		_card.get_source() == Constants.SOURCES.TABLE and
-		_card.get_side() == side
-	):
-		set_selected(true)
-
-func on_deselect_all_cards():
-	set_selected(false)
 
 func on_clickable_entity_changed(entity):
 	if entity == Constants.CLICKABLE_ENTITIES.CARD:

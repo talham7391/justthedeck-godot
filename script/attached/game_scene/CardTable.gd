@@ -1,12 +1,34 @@
 extends Area
 
 func _ready():
+	State.register_selector(self)
 	State.connect("clickable_entity_changed", self, "on_clickable_entity_changed")
 	Channel.connect("pending_put_cards_on_table", self, "on_pending_put_cards_on_table")
+	
+	Channel.connect("select_cards_on_table", self, "on_select_cards_on_table")
+	Channel.connect("deselect_all_cards", self, "on_deselect_all_cards")
+
+func get_cards_on_table():
+	return get_tree().get_nodes_in_group(Constants.GROUPS.CARDS_ON_TABLE)
+
+func get_selected_cards():
+	var selected_cards = []
+	for card in get_cards_on_table():
+		if card.get_selected():
+			selected_cards.append(card.get_card())
+	return selected_cards
+
+func on_select_cards_on_table(side):
+	for card in get_cards_on_table():
+		if card.get_card().get_side() == side:
+			card.set_selected(true)
+
+func on_deselect_all_cards():
+	for card in get_cards_on_table():
+		card.set_selected(false)
 
 func remove_current_cards():
-	var cards = get_tree().get_nodes_in_group("cards")
-	for card in cards:
+	for card in get_cards_on_table():
 		card.free()
 
 func on_pending_put_cards_on_table(cards):
@@ -35,7 +57,7 @@ func on_pending_put_cards_on_table(cards):
 				player_join_order = player["joinOrder"]
 		card_instance.rotation_degrees.y = get_card_instance_rotation(player_join_order)
 		scene.add_child(card_instance)
-		card_instance.add_to_group("cards")
+		card_instance.add_to_group(Constants.GROUPS.CARDS_ON_TABLE)
 
 func on_clickable_entity_changed(entity):
 	if entity == Constants.CLICKABLE_ENTITIES.TABLE:

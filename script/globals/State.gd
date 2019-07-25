@@ -64,23 +64,16 @@ func set_select_allowed(select_allowed):
 
 # SELECTED CARDS
 
-var _selected_cards = []
+var _selectors = []
 
-signal selected_cards_changed
+func register_selector(selector):
+	_selectors.append(selector)
 
 func get_selected_cards():
-	return _selected_cards
-
-func select_card(card):
-	_selected_cards.append(card)
-	emit_signal("selected_cards_changed", _selected_cards)
-
-func deselect_card(card):
-	for i in range(len(_selected_cards)):
-		if card.equals(_selected_cards[i]):
-			_selected_cards.remove(i)
-			break
-	emit_signal("selected_cards_changed", _selected_cards)
+	var cards = []
+	for selector in _selectors:
+		cards = cards + selector.get_selected_cards()
+	return cards
 
 
 # PLAY CARDS SIDE
