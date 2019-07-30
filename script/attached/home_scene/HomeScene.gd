@@ -13,8 +13,9 @@ func on_player_name_change(new_name):
 
 func on_create_game():
 	block_input()
+	Logger.info("Trying to create game")
 	$HTTPRequest.request(
-		"http://localhost:8000/games",
+		"%s/games" % Defaults.game_server,
 		PoolStringArray(),
 		true,
 		HTTPClient.METHOD_POST
@@ -29,11 +30,11 @@ func on_request_completed(result, response_code, headers, body):
 		var data = json.result
 		var game_id = data["gameId"]
 		if game_id != null:
-			print("Created a game - Id: %s" % game_id)
+			Logger.success("Created a game - Id: %s" % game_id)
 			State.set_game_id(game_id)
 			get_tree().change_scene("res://Scenes/room_game.tscn")
 	else:
-		print("Error creating game.")
+		Logger.error("Error creating game")
 	enable_input()
 
 func enable_input():

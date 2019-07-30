@@ -29,6 +29,7 @@ CardFactory="*res://script/globals/CardFactory.gd"
 Client="*res://script/globals/Client.gd"
 Actions="*res://script/globals/Actions.gd"
 Utils="*res://script/globals/Utils.gd"
+Logger="*res://script/globals/Logger.gd"
 
 [rendering]
 
