@@ -1,13 +1,17 @@
 extends Node
 
 signal input_event_on_table
+signal message_from_server
 
 signal pending_put_cards_on_table
 signal pending_put_cards_in_hand
 signal cards_in_hand
 signal pending_remove_cards_from_hand
+signal cards_in_collection
 
 signal select_cards_on_table
 signal deselect_all_cards
+signal card_selected
 
+signal action_completed
 signal cards_played

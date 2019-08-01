@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://script/attached/game_scene/GameScene.gd" type="Script" id=1]
 [ext_resource path="res://script/attached/game_scene/UI.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/table/table_texture.png" type="Texture" id=5]
 [ext_resource path="res://script/attached/game_scene/CameraPivot.gd" type="Script" id=6]
 [ext_resource path="res://script/attached/game_scene/Hand.gd" type="Script" id=7]
+[ext_resource path="res://script/attached/game_scene/Collection.gd" type="Script" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -53,8 +54,28 @@ margin_left = -220.0
 margin_top = 67.0
 margin_right = -20.0
 margin_bottom = 97.0
-rect_pivot_offset = Vector2( 222.341, -14.5036 )
+rect_pivot_offset = Vector2( 182.459, 17.4653 )
 text = "Put Selected Cards in Hand"
+
+[node name="put_cards_in_collection_button" type="Button" parent="ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 114.662
+margin_right = -20.0
+margin_bottom = 144.662
+rect_pivot_offset = Vector2( 182.459, 17.4653 )
+text = "Add Selected Cards to Collection"
+
+[node name="distribute_selected_cards_button" type="Button" parent="ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -194.0
+margin_top = 164.0
+margin_right = -20.0
+margin_bottom = 194.0
+rect_pivot_offset = Vector2( 182.459, 17.4653 )
+text = "Distribute Selected Cards"
 
 [node name="select_cards_on_table_button" type="Button" parent="ui"]
 margin_left = 20.0
@@ -173,10 +194,27 @@ margin_right = 50.0
 margin_bottom = 143.855
 text = "Face Down"
 
+[node name="collection_count" type="Label" parent="ui"]
+margin_left = 24.0
+margin_top = 158.0
+margin_right = 174.0
+margin_bottom = 175.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cards in Collection: 0"
+
+[node name="selected_count" type="Label" parent="ui"]
+margin_left = 24.0
+margin_top = 121.0
+margin_right = 174.0
+margin_bottom = 138.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cards Selected:: 0"
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
 [node name="ground" type="Area" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.14406, 0 )
 collision_layer = 0
 collision_mask = 0
@@ -196,12 +234,11 @@ shadow_color = Color( 0.807843, 0.807843, 0.807843, 1 )
 omni_range = 67.0
 
 [node name="camera_pivot" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 0.642788, 0.766045, 0, -0.766045, 0.642788, 0, 0, 0 )
 script = ExtResource( 6 )
 
 [node name="camera" type="Camera" parent="camera_pivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25 )
+transform = Transform( 1, 0, 0, 0, 0.999999, -8.9407e-08, 0, 2.98023e-08, 0.999999, 0, 0, 25 )
 projection = 1
 current = true
 fov = 57.3
@@ -210,3 +247,7 @@ size = 40.0
 [node name="hand" type="Spatial" parent="camera_pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.8, 20 )
 script = ExtResource( 7 )
+
+[node name="collection" type="Spatial" parent="camera_pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0.19, 20.027 )
+script = ExtResource( 8 )

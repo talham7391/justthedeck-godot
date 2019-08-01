@@ -58,6 +58,10 @@ func _log(message, type, color):
 			"data": "%s\n" % message
 		}]
 	})
+	print("%s: %s" % [type, message])
+
+func debug(message):
+	_log(message, "DEBUG", "grey")
 
 func info(message):
 	_log(message, "INFO", "blue")

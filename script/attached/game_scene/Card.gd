@@ -25,6 +25,7 @@ func set_selected(selected):
 			if material is SpatialMaterial:
 				material.albedo_color = Color.blue if selected else Color.white
 	_selected = selected
+	Channel.emit_signal("card_selected")
 
 func toggle_selected():
 	set_selected(!get_selected())

@@ -15,6 +15,9 @@ func _init(value, suit, type):
 	_suit = suit
 	_type = type
 
+func to_string():
+	return "A %s %s of %s" % [get_type(), get_value(), get_suit()]
+
 func get_type():
 	return _type
 

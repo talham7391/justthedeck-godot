@@ -8,7 +8,7 @@ func put_selected_cards_on_table(location, remove_cards_from_source = true):
 	var cards = Utils.clone_cards(orig_cards)
 	
 	if remove_cards_from_source:
-		remove_cards_from_source(cards)
+		_remove_cards_from_source(cards)
 	
 	for card in cards:
 		card.set_played_by(State.get_player_name())
@@ -24,6 +24,21 @@ func put_selected_cards_on_table(location, remove_cards_from_source = true):
 	
 	Channel.emit_signal("cards_played", cards)
 
+func put_selected_cards_in_collection():
+	var orig_cards = State.get_selected_cards()
+	if len(orig_cards) == 0:
+		return
+	
+	var cards = Utils.clone_cards(orig_cards)
+	_remove_cards_from_source(cards)
+	
+	var action = {
+		"name": "ADD_CARDS_TO_COLLECTION",
+		"data": {
+			"cards": Utils.cardsToJson(cards)
+		}
+	}
+	Client.send_obj_to_server(action)
 
 func put_selected_cards_in_hand():
 	var orig_cards = State.get_selected_cards()
@@ -31,7 +46,7 @@ func put_selected_cards_in_hand():
 		return
 	
 	var cards = Utils.clone_cards(orig_cards)
-	remove_cards_from_source(cards)
+	_remove_cards_from_source(cards)
 	
 	var action = {
 		"name": "ADD_CARDS_TO_HAND",
@@ -41,8 +56,23 @@ func put_selected_cards_in_hand():
 	}
 	Client.send_obj_to_server(action)
 
+func distribute_selected_cards():
+	var orig_cards = State.get_selected_cards()
+	if len(orig_cards) == 0:
+		return
+	
+	var cards = Utils.clone_cards(orig_cards)
+	_remove_cards_from_source(cards)
+	
+	var action = {
+		"name": "DISTRIBUTE_CARDS",
+		"data": {
+			"cards": Utils.cardsToJson(cards)
+		}
+	}
+	Client.send_obj_to_server(action)
 
-func remove_cards_from_source(cards):
+func _remove_cards_from_source(cards):
 	for source in Constants.SOURCES:
 		var cards_to_remove = Utils.filter_cards_by_source(cards, Constants.SOURCES[source])
 		if len(cards_to_remove) == 0:

@@ -4,6 +4,9 @@ var _playing_cards = false
 
 func _ready():
 	Channel.connect("cards_played", self, "on_cards_played")
+	Channel.connect("cards_in_collection", self, "on_cards_in_collection")
+	Channel.connect("message_from_server", self, "on_card_selected")
+	Channel.connect("card_selected", self, "on_card_selected")
 	
 	var game_id = State.get_game_id()
 	$game_id_container/label_game_id.text = "Game ID: %s" % game_id
@@ -16,6 +19,8 @@ func _ready():
 	$play_cards_on_table_dialog/face_down_button.connect("button_up", self, "on_play_cards_face_down")
 	
 	$put_cards_in_hand_button.connect("button_up", self, "on_put_cards_in_hand_button_click")
+	$put_cards_in_collection_button.connect("button_up", self, "on_put_cards_in_collection_button")
+	$distribute_selected_cards_button.connect("button_up", self, "on_distribute_selected_cards_button")
 	
 	$select_cards_on_table_button.connect("button_up", self, "on_select_cards_on_table_button_click")
 	$select_cards_on_table_dialog.connect("popup_hide", self, "on_dialog_hide")
@@ -25,6 +30,12 @@ func _ready():
 	
 	on_deselect_cards_button_click()
 
+func on_card_selected():
+	$selected_count.text = "Cards selected: %d" % len(State.get_selected_cards())
+	
+func on_cards_in_collection(cards):
+	$collection_count.text = "Cards in collection: %d" % len(cards)
+	
 func on_select_cards_on_table_button_click():
 	$select_cards_on_table_dialog.popup()
 	State.set_select_allowed(false)
@@ -39,8 +50,14 @@ func on_play_cards_on_table_button_click():
 		$play_cards_on_table_dialog.popup()
 		State.set_select_allowed(false)
 
+func on_distribute_selected_cards_button():
+	Actions.distribute_selected_cards()
+	
 func on_put_cards_in_hand_button_click():
 	Actions.put_selected_cards_in_hand()
+
+func on_put_cards_in_collection_button():
+	Actions.put_selected_cards_in_collection()
 
 func on_play_cards_face_up():
 	allow_play_cards(Constants.SIDES.FACE_UP)
